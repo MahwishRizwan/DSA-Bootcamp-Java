@@ -1,3 +1,4 @@
+// An array out of bound exception is occuring in the code when we want to get the index of the target element that is present in the nth part of the array and the end is set to the index greater than the length of the array. Therefore could we do the things how i made changes in the code or its some other way to tackle the exception.
 package com.kunal;
 // https://www.geeksforgeeks.org/find-position-element-sorted-array-infinite-numbers/
 public class InfiniteArray {
@@ -14,11 +15,11 @@ public class InfiniteArray {
         int end = 1;
 
         // condition for the target to lie in the range
-        while (target > arr[end]) {
+        while (target > arr[end] && end < arr.length) {
             int temp = end + 1; // this is my new start
             // double the box value
             // end = previous end + sizeofbox*2
-            end = end + (end - start + 1) * 2;
+             end = Math.min( end + (end - start + 1) * 2 , arr.length-1);
             start = temp;
         }
         return binarySearch(arr, target, start, end);
